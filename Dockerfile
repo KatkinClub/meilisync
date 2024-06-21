@@ -10,9 +10,10 @@ RUN poetry install -E all
 
 FROM python:3.12-slim
 WORKDIR /meilisync
-RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst \
-  && chmod +x envsubst \
-  && mv envsubst /usr/local/bin
+RUN apt update && apt install -y curl
+RUN curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst && \
+  chmod +x envsubst && \
+  mv envsubst /usr/local/bin
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 COPY --from=builder /meilisync /meilisync
