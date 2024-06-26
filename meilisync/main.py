@@ -117,6 +117,7 @@ def start(
                             await meili.handle_events(collection)
                             await progress.set(**current_progress)
                             if meili_settings.insert_interval:
+                                logger.log(f"Waiting {settings.meilisearch.insert_interval} seconds before inserting next batch...")
                                 await asyncio.sleep(settings.meilisearch.insert_interval)
             else:
                 await progress.set(**current_progress)
