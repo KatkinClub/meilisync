@@ -116,6 +116,8 @@ def start(
                         async with lock:
                             await meili.handle_events(collection)
                             await progress.set(**current_progress)
+                            if meili_settings.insert_interval:
+                                await asyncio.sleep(settings.meilisearch.insert_interval)
             else:
                 await progress.set(**current_progress)
 
