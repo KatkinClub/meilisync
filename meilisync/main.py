@@ -72,7 +72,7 @@ def version():
 def start(
     context: typer.Context,
 ):
-    current_progress = context.obj["current_progress"]
+    current_progress = {}
     source = context.obj["source"]
     meili = context.obj["meili"]
     settings = context.obj["settings"]
